@@ -9,6 +9,8 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "c8": "^10.1.3",
+    "mocha-lcov-reporter": "^1.3.0"
+  }
 }
