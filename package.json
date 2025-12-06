@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha",
-    "coverage": "c8 --reporter=lcov mocha"
+    "coverage": "c8 --include '/src/*.js' --exclude '/src/.internal/**' --reporter=lcov mocha"
   },
   "author": "",
   "license": "MIT",
