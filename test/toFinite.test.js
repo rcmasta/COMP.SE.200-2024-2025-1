@@ -19,7 +19,7 @@ describe ("toFinite tests", () =>
     {
         it("Should return "+expected+" when value is "+scenario, () =>
         {
-            expect(toFinite(value)).to.equal(expected)
+            expect(toFinite(value)).to.deep.equal(expected)
         })
     })
 })

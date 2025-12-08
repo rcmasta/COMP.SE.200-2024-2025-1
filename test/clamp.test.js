@@ -21,7 +21,7 @@ describe ("clamp tests", () =>
     {
         it(scenario+": Should return "+expected+" when value is "+value+" and bounds are "+lower+", "+upper, () =>
         {
-            expect(clamp(value, lower, upper)).to.equal(expected)
+            expect(clamp(value, lower, upper)).to.deep.equal(expected)
         })
     })
 })

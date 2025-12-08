@@ -18,7 +18,7 @@ describe("isLength tests", () =>
     {
         it("Should return "+expected+" when value is "+scenario, () =>
         {
-            expect(isLength(value)).to.equal(expected)
+            expect(isLength(value)).to.deep.equal(expected)
         })
     })
 })
