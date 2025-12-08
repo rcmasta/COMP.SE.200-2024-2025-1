@@ -11,7 +11,8 @@ describe ("toFinite tests", () =>
         { value: NaN, expected: 0, scenario: "NaN"},
         { value: "3.14159", expected: 3.14159, scenario: "string containing 3.14159"},
         { value: -0, expected: -0, scenario: "negative 0"},
-        { value: "asd", expected: 0, scenario: "string"}
+        { value: "asd", expected: 0, scenario: "string"},
+        { value: 1, expected: 1, scenario: "1"}
     ]
 
     testCases.forEach(({value, expected, scenario}) =>
