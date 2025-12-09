@@ -5,8 +5,8 @@ describe ("clamp tests", () =>
 {
     const testCases = [
         { value: NaN, lower: 0, upper: 10, expected: NaN, scenario: "Value is NaN"},
-        { value: Infinity, lower: 0, upper: 10, expected: 10, scenario: "Value is infinity" },
-        { value: -Infinity, lower: 0, upper: 10, expected: 0, scenario: "Value is negative infinity" },
+        { value: Infinity, lower: -10, upper: 10, expected: 10, scenario: "Value is infinity" },
+        { value: -Infinity, lower: -10, upper: 10, expected: -10, scenario: "Value is negative infinity" },
         { value: "asd", lower: 0, upper: 10, expected: NaN, scenario: "Value is string" },
         { value: -5, lower: NaN, upper: 10, expected: 0, scenario: "Lower bound is NaN" },
         { value: 5, lower: -10, upper: NaN, expected: 0, scenario: "Upper bound is NaN"},
