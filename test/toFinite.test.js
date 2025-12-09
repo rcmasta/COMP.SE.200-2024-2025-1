@@ -17,7 +17,7 @@ describe ("toFinite tests", () =>
 
     testCases.forEach(({value, expected, scenario}) =>
     {
-        it("Should return "+expected+" when value is "+scenario, () =>
+        it(scenario+": Should return "+expected+" when value is "+value, () =>
         {
             expect(toFinite(value)).to.deep.equal(expected)
         })
