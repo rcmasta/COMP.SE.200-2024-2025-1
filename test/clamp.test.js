@@ -1,27 +1,45 @@
 import { expect } from "chai"
 import clamp from "../src/clamp.js"
 
-describe ("clamp tests", () => 
+describe ("clamp tests according to testing plan", () => 
 {
+    const validValue = 20
+    const validInBounds = 5
+    const string = "asd"
+    const validBound = 10
+
     const testCases = [
-        { value: NaN, lower: 0, upper: 10, expected: NaN, scenario: "Value is NaN"},
-        { value: Infinity, lower: -10, upper: 10, expected: 10, scenario: "Value is infinity" },
-        { value: -Infinity, lower: -10, upper: 10, expected: -10, scenario: "Value is negative infinity" },
-        { value: "asd", lower: 0, upper: 10, expected: NaN, scenario: "Value is string" },
-        { value: -5, lower: NaN, upper: 10, expected: 0, scenario: "Lower bound is NaN" },
-        { value: 5, lower: -10, upper: NaN, expected: 0, scenario: "Upper bound is NaN"},
-        { value: 20, lower: 10, upper: 0, expected: 10, scenario: "Lower > upper, value out of bounds" },
-        { value: 5, lower: 10, upper: 0, expected: 5, scenario: "Lower > upper, value in bounds" },
-        { value: 5, lower: 2, upper: 8, expected: 5, scenario: "In bounds" },
-        { value: -5, lower: 2, upper: 8, expected: 2, scenario: "Under lower bound"},
-        { value: 10, lower: -8, upper: -2, expected: -2, scenario: "Over upper bound"}
+        { value: validValue, lower: -validBound, upper: validBound, expected: validBound, scenario: "Valid, over upper bound"},
+        { value: -validValue, lower: -validBound, upper: validBound, expected: -validBound, scenario: "Valid, under lower bound"},
+        { value: validInBounds, lower: -validBound, upper: validBound, expected: validInBounds, scenario: "In bounds" },
+        { value: string, lower: -validBound, upper: validBound, expected: NaN, scenario: "Value is string" },
+        { value: validValue, lower: string, upper: validBound, expected: TypeError, scenario: "Lower bound is string" },
+        { value: validValue, lower: -validBound, upper: string, expected: TypeError, scenario: "Upper bound is string"},
+        { value: NaN, lower: -validBound, upper: validBound, expected: NaN, scenario: "Value is NaN"},
+        { value: validValue, lower: NaN, upper: validBound, expected: TypeError, scenario: "Lower bound is NaN" },
+        { value: validValue, lower: -validBound, upper: NaN, expected: TypeError, scenario: "Upper bound is NaN"},
+        { value: Infinity, lower: -validBound, upper: validBound, expected: validBound, scenario: "Value is infinity" },
+        { value: -Infinity, lower: -validBound, upper: validBound, expected: -validBound, scenario: "Value is negative infinity" },
+        { value: validValue, lower: validBound, upper: -validBound, expected: RangeError, scenario: "Lower > upper, value out of bounds" },
+        { value: validInBounds, lower: validBound, upper: -validBound, expected: RangeError, scenario: "Lower > upper, value in bounds" }
     ]
 
     testCases.forEach(({value, lower, upper, expected, scenario}) =>
     {
-        it(scenario+": Should return "+expected+" when value is "+value+" and bounds are "+lower+", "+upper, () =>
+        if (typeof expected === "function")
         {
-            expect(clamp(value, lower, upper)).to.deep.equal(expected)
-        })
+            it(scenario+": Should throw error when value is "+value+" and bounds are "+lower+", "+upper, () =>
+            {
+                expect(clamp(value, lower, upper)).to.throw(expected)
+            })
+        }
+        else
+        {
+            it(scenario+": Should return "+expected+" when value is "+value+" and bounds are "+lower+", "+upper, () =>
+            {
+                expect(clamp(value, lower, upper)).to.deep.equal(expected)
+            })
+        }
+        
     })
 })
