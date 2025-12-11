@@ -28,22 +28,22 @@ describe ("clamp tests according to testing plan", () =>
     {
         if (typeof expected === "function")
         {
-            it(scenario+": Should throw error when value is "+value+" and bounds are "+lower+", "+upper, () =>
-            {
-                expect(clamp(value, lower, upper)).to.throw(expected)
-            })
+            it(scenario+": Should throw "+expected.name+" when value is "+value+" and bounds are "+lower+", "+upper, () =>
+            { expect(() => clamp(value, lower, upper)).to.throw(expected) })
         }
         else
         {
             it(scenario+": Should return "+expected+" when value is "+value+" and bounds are "+lower+", "+upper, () =>
-            {
-                expect(clamp(value, lower, upper)).to.deep.equal(expected)
-            })
+            { expect(clamp(value, lower, upper)).to.deep.equal(expected) })
         }
         
     })
 })
 
+// Generated with Microsoft Copilot (GPT-5)
+// Prompt:
+// "Create a test suite that aims for 100% statement, branch, function and line coverage for attached JavaScript file.
+//  Testing framework is Mocha and Chai."
 describe ("clamp AI generated tests", () => 
 {
     describe('clamp(number, lower, upper)', () => {
